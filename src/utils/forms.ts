@@ -1,16 +1,13 @@
 import { SyntheticEvent } from "react";
 
-type FormElements = HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement;
-
 function formHandler<FormData extends Record<string, unknown>>(
   handleSubmit: (formData: FormData) => void
 ) {
   return (e: SyntheticEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const formData: FormData | {} = {};
-    const formElements = e.currentTarget
-      .elements as HTMLFormControlsCollection & Record<string, FormElements>;
+    const formData = <FormData>{};
+    const formElements = e.currentTarget.elements;
 
     for (const formElement of formElements) {
       // @ts-ignore
@@ -20,7 +17,7 @@ function formHandler<FormData extends Record<string, unknown>>(
       }
     }
 
-    handleSubmit(formData as FormData);
+    handleSubmit(formData);
   };
 }
 

@@ -1,14 +1,10 @@
 import { useUser } from "../contexts/user";
 import { formHandler } from "../utils/forms";
 
-interface LoginData extends Record<string, unknown> {
-  username: string;
-}
-
 function LoginPage() {
   const { setUser } = useUser();
 
-  const handleSubmit = formHandler<LoginData>((formData) => {
+  const handleSubmit = formHandler<{ username: string }>((formData) => {
     if (formData.username.length > 3) {
       setUser({ name: formData.username, count: 0 });
     }
