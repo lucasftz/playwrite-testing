@@ -7,7 +7,7 @@ function formHandler<FormData extends Record<string, unknown>>(
     e.preventDefault();
 
     const formData = <FormData>{};
-    const formElements = e.currentTarget.elements;
+    const formElements = Array.from(e.currentTarget.elements);
 
     for (const formElement of formElements) {
       // @ts-ignore
