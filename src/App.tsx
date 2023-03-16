@@ -3,9 +3,9 @@ import { HomePage } from "./pages/HomePage";
 import { LoginPage } from "./pages/LoginPage";
 
 function App() {
-  const { user } = useUser();
+  const { isLoggedIn } = useUser();
 
-  return user ? <HomePage /> : <LoginPage />;
+  return isLoggedIn ? <HomePage /> : <LoginPage />;
 }
 
 export default App;

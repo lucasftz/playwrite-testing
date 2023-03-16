@@ -11,11 +11,15 @@ interface User {
   count: number;
 }
 
-const UserContext = createContext<{
-  user: User | null;
-  setUser: Dispatch<SetStateAction<User | null>>;
-}>({
-  user: null,
+type UserContextType = {
+  isLoggedIn: boolean;
+  user: User;
+  setUser: (args: SetStateAction<User>) => void;
+};
+
+const UserContext = createContext<UserContextType>({
+  isLoggedIn: false,
+  user: { name: "", count: 0 },
   setUser: () => {},
 });
 
@@ -24,10 +28,19 @@ interface Props {
 }
 
 function UserProvider({ children }: Props) {
-  const [user, setUser] = useState<User | null>(null);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [user, setUser] = useState<User>({
+    name: "",
+    count: 0,
+  });
+
+  const handleSetUser = (args: Parameters<typeof setUser>[0]) => {
+    setIsLoggedIn(true);
+    setUser(args);
+  };
 
   return (
-    <UserContext.Provider value={{ user, setUser }}>
+    <UserContext.Provider value={{ isLoggedIn, user, setUser: handleSetUser }}>
       {children}
     </UserContext.Provider>
   );
