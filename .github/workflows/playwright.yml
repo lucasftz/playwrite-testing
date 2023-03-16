@@ -25,7 +25,7 @@ jobs:
         env:
           NETLIFY_TOKEN: ${{ secrets.NETLIFY_TOKEN }}
       - name: Run Playwright tests
-        run: run: WEBSITE_URL=${{ steps.get-netlify-preview-url.outputs.url }} yarn playwright test
+        run: WEBSITE_URL=${{ steps.get-netlify-preview-url.outputs.url }} yarn playwright test
       - uses: actions/upload-artifact@v3
         if: always()
         with:
