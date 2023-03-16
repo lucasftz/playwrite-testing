@@ -1,18 +1,11 @@
-import { useState } from "react";
+import { useUser } from "./contexts/user";
+import { HomePage } from "./pages/HomePage";
+import { LoginPage } from "./pages/LoginPage";
 
 function App() {
-  const [count, setCount] = useState(0);
+  const { user } = useUser();
 
-  function incrementCount() {
-    setCount((prev) => prev + 1);
-  }
-
-  return (
-    <div>
-      <h1>Hello world</h1>
-      <button onClick={incrementCount}>Count: {count}</button>
-    </div>
-  );
+  return user ? <HomePage /> : <LoginPage />;
 }
 
 export default App;
