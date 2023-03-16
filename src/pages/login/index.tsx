@@ -1,13 +1,17 @@
-import { useUser } from "../contexts/user";
-import { formHandler } from "../utils/forms";
+import { useRouter } from "next/router";
+import { useUser } from "@/contexts/user";
+import { formHandler } from "@/utils/forms";
 
 function LoginPage() {
   const { setUser } = useUser();
+  const router = useRouter();
 
   const handleSubmit = formHandler<{ username: string }>((formData) => {
     if (formData.username.length > 3) {
       setUser({ name: formData.username, count: 0 });
     }
+
+    router.push("/");
   });
 
   return (
@@ -21,4 +25,4 @@ function LoginPage() {
   );
 }
 
-export { LoginPage };
+export default LoginPage;
