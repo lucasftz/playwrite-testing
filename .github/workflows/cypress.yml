@@ -1,5 +1,9 @@
 name: Chrome
-on: push
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
 jobs:
   chrome:
     runs-on: ubuntu-22.04
