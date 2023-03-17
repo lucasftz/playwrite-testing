@@ -1,0 +1,29 @@
+name: Chrome
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+jobs:
+  chrome:
+    runs-on: ubuntu-22.04
+    name: E2E on Chrome
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install Node.js 16.x
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '16.19.0'
+    - name: Wait for Netlify Deploy
+      uses: mmazzarolo/wait-for-netlify-action@8a7a8d8cf5b313c916d805b76cc498380062d268
+      id: get-netlify-preview-url
+      with:
+        site_id: "e2a77606-482f-4d85-8a30-cf6d8221736d"
+      env:
+        NETLIFY_TOKEN: ${{ secrets.NETLIFY_TOKEN }}
+    - name: Cypress run
+    - uses: cypress-io/github-action@v5
+      with:
+        browser: chrome
+      env:
+        WEBSITE_URL: ${{ steps.get-netlify-preview-url.outputs.url }}
