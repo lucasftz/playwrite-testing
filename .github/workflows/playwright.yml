@@ -21,7 +21,7 @@ jobs:
         uses: mmazzarolo/wait-for-netlify-action@8a7a8d8cf5b313c916d805b76cc498380062d268
         id: get-netlify-preview-url
         with:
-          site_id: "aa6749a9-cc60-4bd2-9933-b4287847cd44"
+          site_id: "e2a77606-482f-4d85-8a30-cf6d8221736d"
         env:
           NETLIFY_TOKEN: ${{ secrets.NETLIFY_TOKEN }}
       - name: Run Playwright tests
